@@ -16,7 +16,7 @@ scale_fill_pattern_simple(
 \arguments{
 \item{...}{arguments passed to \code{ggplot2::discrete_scale()}}
 
-\item{pattern_name}{the name of the pattern. one of 'stripe', 'dot', 'hatch'}
+\item{pattern_name}{the name of the pattern. one of 'stripe', 'dot', 'hatch', 'check', 'stipple', 'hex'}
 
 \item{angle}{the vector of angles to choose from (order matters)}
 

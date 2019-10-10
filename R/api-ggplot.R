@@ -3,7 +3,7 @@
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #' Create a pattern palette generator
 #'
-#' @param pattern_name the name of the pattern. one of 'stripe', 'dot', 'hatch'
+#' @param pattern_name the name of the pattern. one of 'stripe', 'dot', 'hatch', 'check', 'stipple', 'hex'
 #' @param angle the vector of angles to choose from (order matters)
 #' @param spacing the vector of spacing choices
 #' @param fill_fraction the vector of fill_fraction choices
@@ -12,9 +12,9 @@
 #'
 #' @import purrr
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-gen_pattern_simple_pal_func <- function(pattern_name  = c('stripe', 'dot', 'hatch', 'check'),
-                                        angle         = c(22., 45, 67.5, 135),
-                                        spacing       = seq(5, 100, length.out = 7),
+gen_pattern_simple_pal_func <- function(pattern_name  = c('stripe', 'dot', 'hatch', 'check', 'stipple', 'hex'),
+                                        angle         = c(22., 45, 67.5),
+                                        spacing       = seq(5, 50, length.out = 7),
                                         fill_fraction = seq(0.1, 0.9, length.out = 3)) {
 
   Ncombos <- length(pattern_name) * length(angle) * length(spacing) * length(fill_fraction)
@@ -26,10 +26,10 @@ gen_pattern_simple_pal_func <- function(pattern_name  = c('stripe', 'dot', 'hatc
   }
 
   pattern_ref_grid <- expand.grid(
-    pattern_name  = pattern_name,
     angle         = angle,
     spacing       = spacing,
     fill_fraction = fill_fraction,
+    pattern_name  = pattern_name,
     stringsAsFactors = FALSE
   )
 

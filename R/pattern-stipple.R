@@ -50,10 +50,9 @@ create_stipple_pattern <- function(id,
 
   inner_style <- glue::glue("fill: {colour}; stroke: {colour}; fill-opacity: {fg_alpha}; stroke-opacity: {fg_alpha}")
 
-  circles <- glue::glue("<circle cx='{round(pts$x, 2)}' cy='{round(pts$y, 2)}' r='{r}' />")
+  circles <- glue::glue("<circle cx='{round(pts$x, 2)}' cy='{round(pts$y, 2)}' r='{r}' style='{inner_style}' />")
   circles <- paste(circles, collapse = "\n")
   circles <- minisvg::stag$g(
-    style = inner_style,
     circles
   )
 

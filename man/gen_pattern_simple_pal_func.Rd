@@ -5,14 +5,14 @@
 \title{Create a pattern palette generator}
 \usage{
 gen_pattern_simple_pal_func(
-  pattern_name = c("stripe", "dot", "hatch", "check"),
-  angle = c(22, 45, 67.5, 135),
-  spacing = seq(5, 100, length.out = 7),
+  pattern_name = c("stripe", "dot", "hatch", "check", "stipple", "hex"),
+  angle = c(22, 45, 67.5),
+  spacing = seq(5, 50, length.out = 7),
   fill_fraction = seq(0.1, 0.9, length.out = 3)
 )
 }
 \arguments{
-\item{pattern_name}{the name of the pattern. one of 'stripe', 'dot', 'hatch'}
+\item{pattern_name}{the name of the pattern. one of 'stripe', 'dot', 'hatch', 'check', 'stipple', 'hex'}
 
 \item{angle}{the vector of angles to choose from (order matters)}
 
