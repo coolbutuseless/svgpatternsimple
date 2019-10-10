@@ -39,9 +39,8 @@ create_check_pattern <- function(id,
     ),
 
     minisvg::stag$g(
-      style = inner_style,
-      minisvg::stag$rect(width = w, height = w, x = 0, y = 0),
-      minisvg::stag$rect(width = w, height = w, x = w, y = w)
+      minisvg::stag$rect(width = w, height = w, x = 0, y = 0, style = inner_style),
+      minisvg::stag$rect(width = w, height = w, x = w, y = w, style = inner_style)
     )
   )
 
