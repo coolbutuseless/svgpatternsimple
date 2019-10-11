@@ -21,7 +21,7 @@ You can install from
 # install.packages("devtools")
 install_github("coolbutuseless/lofi")             # for encoding information as RGB colours
 install_github("coolbutuseless/poissoned")        # Generate points via poisson disk sampling
-install_github("coolbutuseless/minnisvg")         # Build SVG documents with R
+install_github("coolbutuseless/minisvg")          # Build SVG documents with R
 install_github("coolbutuseless/svgpatternsimple") # This package
 ```
 
