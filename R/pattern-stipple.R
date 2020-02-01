@@ -2,9 +2,12 @@
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' Create stipple svg pattern
+#' Create an SVG stipple pattern
 #'
-#' @inheritParams create_stripe_pattern
+#' Create an SVG pattern which will \code{fill} an element with dots using
+#' poisson disc sampling. This makes use of the \code{poissoned} package.
+#'
+#' @inheritParams create_pattern_stripe
 #'
 #' @return minisvg::SVGPattern object
 #'
@@ -12,8 +15,35 @@
 #' @import glue
 #' @importFrom poissoned poisson_disc
 #' @export
+#'
+#'
+#' @examples
+#' \dontrun{
+#' # Create an SVG document
+#' library(minisvg)
+#' doc   <- minisvg::svg_doc()
+#'
+#' # Create the pattern and add to the SVG definitions
+#' my_pattern <- create_pattern_stipple(id = 'mypattern')
+#' doc$defs(my_pattern)
+#'
+#' # Create a rectangle with the animation
+#' rect  <- stag$rect(
+#'   x      = "10%",
+#'   y      = "10%",
+#'   width  = "80%",
+#'   height = "80%",
+#'   stroke = 'black',
+#'   fill   = my_pattern
+#' )
+#'
+#' # Add this rectangle to the document, show the SVG text, then render it
+#' doc$append(rect)
+#' doc
+#' doc$show()
+#' }
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-create_stipple_pattern <- function(id,
+create_pattern_stipple <- function(id,
                                    spacing       = 20,
                                    fill_fraction = 0.2,
                                    alpha         = 1.0,

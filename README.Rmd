@@ -26,41 +26,12 @@ set.seed(1) # for repeatable stipple pattern
 
 
 ```{r echo = FALSE, eval = FALSE}
-# Quick logo generation. Borrowed heavily from Nick Tierney's Syn logo process
-library(magick)
-library(showtext)
-font_add_google("Abril Fatface", "gf")
-
-
 # pkgdown::build_site(override = list(destination = "../coolbutuseless.github.io/package/svgpatternsimple"))
 ```
 
 
-```{r echo = FALSE, eval = FALSE}
-img <- image_read("man/figures/white.png") 
 
-
-hexSticker::sticker(subplot  = img,
-                    s_x      = 0.92,
-                    s_y      = 1.2,
-                    s_width  = 1.5,
-                    s_height = 0.95,
-                    package  = "svg\npattern\nsimple",
-                    p_x      = 1,
-                    p_y      = 1.1,
-                    p_color  = "#223344",
-                    p_family = "gf",
-                    p_size   = 9,
-                    h_size   = 1.2,
-                    h_fill   = "#ffffff",
-                    h_color  = "#223344",
-                    filename = "man/figures/logo.png")
-
-image_read("man/figures/logo.png")
-```
-
-
-# svgpatternsimple   <img src="man/figures/logo.png" align="right" height=230/>
+# svgpatternsimple   <img src="man/figures/logo.svg" align="right" height=230/>
 
 <!-- badges: start -->
 ![](http://img.shields.io/badge/cool-useless-green.svg)
@@ -76,7 +47,6 @@ You can install from [GitHub](https://github.com/coolbutuseless/svgpatternsimple
 
 ``` r
 # install.packages("devtools")
-install_github("coolbutuseless/lofi")             # for encoding information as RGB colours
 install_github("coolbutuseless/poissoned")        # Generate points via poisson disk sampling
 install_github("coolbutuseless/minnisvg")         # Build SVG documents with R
 install_github("coolbutuseless/svgpatternsimple") # This package
@@ -97,18 +67,20 @@ method `$as_full_svg()`, and to display it in an RStudio session use `$show()`
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Create a dot pattern
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-dot <- create_dot_pattern(id = 'dot')
+dot <- create_pattern_dot(id = 'dot')
 ```
 
 ```{r eval=FALSE}
 dot$show()
 ```
 
-
 ```{r echo=FALSE, results='asis'}
-cat("<pre><details closed><summary> Show SVG text (click to open) </summary>",
-htmltools::htmlEscape(as.character(dot$as_full_svg())), 
-"</details></pre>\n", sep='')
+cat(
+  "<pre>",
+  "<details><summary style='color: #4169E1;'> Show/hide SVG text </summary>",
+  htmltools::htmlEscape(as.character(dot$as_full_svg())),
+  "</details>",
+  "</pre>", sep='')
 ```
 
 
@@ -126,43 +98,35 @@ dot$save_full_svg("man/figures/README-example-dot.svg", height=100, include_decl
 
 ## Example: All patterns
 
-There are 8 pattern types included in this package - this includes a `null`
-pattern which doesn't do anything.
-
+There are currently 7 pattern types included in this package.  
 Patterns are created using `create_[type]_pattern()`, and arguments control the
 appearance of the generated pattern e.g. opacity, orientation etc.
 
 ```{r}
-dot          <- create_dot_pattern     (id = 'p1' , fill_fraction = 0.4)
-stripe       <- create_stripe_pattern  (id = 'p2' , angle = 60)
-hatch        <- create_hatch_pattern   (id = 'p3' , spacing = 50)
-stipple      <- create_stipple_pattern (id = 'p4' , colour = 'hotpink')
-hex          <- create_hex_pattern     (id = 'p5' , fill_fraction = 0.1)
-check        <- create_check_pattern   (id = 'p6' , spacing = 30, colour = 'darkgreen')
-gradient     <- create_gradient_pattern(id = 'p7' , colour1 = 'hotpink', colour2 = 'darkblue')
-null         <- create_null_pattern    (id = 'p8' , colour = '#123456')
-```
+dot          <- create_pattern_dot     (id = 'p1' , fill_fraction = 0.4)
+stripe       <- create_pattern_stripe  (id = 'p2' , angle = 60)
+hatch        <- create_pattern_hatch   (id = 'p3' , spacing = 50)
+stipple      <- create_pattern_stipple (id = 'p4' , colour = 'hotpink')
+hex          <- create_pattern_hex     (id = 'p5' , fill_fraction = 0.1)
+check        <- create_pattern_check   (id = 'p6' , spacing = 30, colour = 'darkgreen')
+gradient     <- create_pattern_gradient(id = 'p7' , colour1 = 'hotpink', colour2 = 'darkblue')
 
-
-```{r echo=FALSE}
-pattern_list <- list(dot, stripe, hatch, stipple, hex, check, gradient, null)
+pattern_list <- list(dot, stripe, hatch, stipple, hex, check, gradient)
 doc <- SVGPatternList_to_svg(pattern_list, height = 100, ncol = 2)
+# doc$show()
+doc$save("man/figures/README-all-patterns.svg")
 ```
 
 
 ```{r echo=FALSE, results='asis'}
-cat("<pre><details closed><summary> Show SVG text (click to open) </summary>",
-htmltools::htmlEscape(as.character(doc)), 
-"</details></pre>\n", sep='')
+cat(
+  "<pre>",
+  "<details><summary style='color: #4169E1;'> Show/hide SVG text </summary>",
+  htmltools::htmlEscape(as.character(doc)),
+  "</details>",
+  "</pre>", sep='')
 ```
 
-
-```{r echo = FALSE}
-if (interactive()) {
-  doc$show()
-  doc$save("man/figures/README-all-patterns.svg")
-} 
-```
 
 <img src="man/figures/README-all-patterns.svg" />
 
@@ -170,7 +134,9 @@ if (interactive()) {
 
 ### Stripes
 
-```{r echo=FALSE}
+<details><summary style='color: #4169E1;'>Show R code (click to open/close) </summary>
+
+```{r echo=TRUE}
 vars <- expand.grid(
   angle = c(0, 45, 90, 135),
   fill_fraction = c(0.05, 0.25, 0.5, 0.95)
@@ -178,19 +144,23 @@ vars <- expand.grid(
   mutate(id = paste('stripe', angle, fill_fraction, sep="_"))
 
 patterns <- vars %>% 
-  purrr::pmap(create_stripe_pattern)
-```
+  purrr::pmap(create_pattern_stripe)
 
-
-```{r echo=FALSE}
 doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
+# doc$show()
 ```
+
+</details>
+
 
 
 ```{r echo=FALSE, results='asis'}
-cat("<pre><details closed><summary> Show SVG text (click to open) </summary>",
-htmltools::htmlEscape(as.character(doc)), 
-"</details></pre>\n", sep='')
+cat(
+  "<pre>",
+  "<details><summary style='color: #4169E1;'> Show/hide SVG text </summary>",
+  htmltools::htmlEscape(as.character(doc)),
+  "</details>",
+  "</pre>", sep='')
 ```
 
 ```{r echo = FALSE}
@@ -206,7 +176,9 @@ doc$save("man/figures/README-stripes.svg")
 
 ### Dot patterns
 
-```{r echo=FALSE}
+<details><summary style='color: #4169E1;'>Show R code (click to open/close) </summary>
+
+```{r echo=TRUE}
 vars <- expand.grid(
   angle = c(0, 22.5, 45, 67.5),
   fill_fraction = c(0.05, 0.25, 0.5, 0.95)
@@ -214,120 +186,143 @@ vars <- expand.grid(
   mutate(id = paste('dot', angle, fill_fraction, sep="_"))
 
 patterns <- vars %>% 
-  purrr::pmap(create_dot_pattern) 
-```
+  purrr::pmap(create_pattern_dot) 
 
-```{r echo=FALSE}
 doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
-```
-
-
-```{r echo=FALSE, results='asis'}
-cat("<pre><details closed><summary> Show SVG text (click to open) </summary>",
-htmltools::htmlEscape(as.character(doc)), 
-"</details></pre>\n", sep='')
-```
-
-```{r echo = FALSE}
-if (interactive()) {
-  doc$show()
-} 
+# doc$show()
 doc$save("man/figures/README-dots.svg")
 ```
 
+</details>
+
+
+```{r echo=FALSE, results='asis'}
+cat(
+  "<pre>",
+  "<details><summary style='color: #4169E1;'> Show/hide SVG text </summary>",
+  htmltools::htmlEscape(as.character(doc)),
+  "</details>",
+  "</pre>", sep='')
+```
+
+
 <img src="man/figures/README-dots.svg" />
+
+
+
 
 ### Hatching
 
-```{r echo=FALSE}
+<details><summary style='color: #4169E1;'>Show R code (click to open/close) </summary>
+
+```{r echo=TRUE}
 patterns <- vars %>% 
   mutate(id = paste('hatch', angle, fill_fraction, sep="_")) %>% 
-  purrr::pmap(create_hatch_pattern) 
-```
+  purrr::pmap(create_pattern_hatch) 
 
-
-```{r echo=FALSE}
 doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
-```
-
-
-```{r echo=FALSE, results='asis'}
-cat("<pre><details closed><summary> Show SVG text (click to open) </summary>",
-htmltools::htmlEscape(as.character(doc)), 
-"</details></pre>\n", sep='')
-```
-
-```{r echo = FALSE}
-if (interactive()) {
-  doc$show()
-} 
+# doc$show()
 doc$save("man/figures/README-hatch.svg")
 ```
 
+</details>
+
+
+```{r echo=FALSE}
+```
+
+
+```{r echo=FALSE, results='asis'}
+cat(
+  "<pre>",
+  "<details><summary style='color: #4169E1;'> Show/hide SVG text </summary>",
+  htmltools::htmlEscape(as.character(doc)),
+  "</details>",
+  "</pre>", sep='')
+```
+
+
 <img src="man/figures/README-hatch.svg" />
+
+
+
 
 ### Stippling
 
-```{r echo=FALSE}
+<details><summary style='color: #4169E1;'>Show R code (click to open/close) </summary>
+
+```{r echo=TRUE}
 set.seed(1)
 patterns <- vars %>% 
   mutate(id = paste('stipple', angle, fill_fraction, sep="_")) %>% 
-  purrr::pmap(create_stipple_pattern) 
-```
+  purrr::pmap(create_pattern_stipple) 
 
-
-```{r echo=FALSE}
 doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
-```
-
-
-```{r echo=FALSE, results='asis'}
-cat("<pre><details closed><summary> Show SVG text (click to open) </summary>",
-htmltools::htmlEscape(as.character(doc)), 
-"</details></pre>\n", sep='')
-```
-
-```{r echo = FALSE}
-if (interactive()) {
-  doc$show()
-} 
+# doc$show()
 doc$save("man/figures/README-stipple.svg")
 ```
 
-<img src="man/figures/README-stipple.svg" />
+</details>
 
-### Hex patterns
-
-```{r echo=FALSE}
-patterns <- vars %>% 
-  mutate(id = paste('hex', angle, fill_fraction, sep="_")) %>% 
-  purrr::pmap(create_hex_pattern)
-```
-
-
-```{r echo=FALSE}
-doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
-```
 
 
 ```{r echo=FALSE, results='asis'}
-cat("<pre><details closed><summary> Show SVG text (click to open) </summary>",
-htmltools::htmlEscape(as.character(doc)), 
-"</details></pre>\n", sep='')
+cat(
+  "<pre>",
+  "<details><summary style='color: #4169E1;'> Show/hide SVG text </summary>",
+  htmltools::htmlEscape(as.character(doc)),
+  "</details>",
+  "</pre>", sep='')
 ```
 
-```{r echo = FALSE}
-if (interactive()) {
-  doc$show()
-} 
+
+<img src="man/figures/README-stipple.svg" />
+
+
+
+
+### Hex patterns
+
+<details><summary style='color: #4169E1;'>Show R code (click to open/close) </summary>
+
+```{r echo=TRUE}
+patterns <- vars %>% 
+  mutate(id = paste('hex', angle, fill_fraction, sep="_")) %>% 
+  purrr::pmap(create_pattern_hex)
+
+doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
+# doc$show()
 doc$save("man/figures/README-hex.svg")
 ```
 
+</details>
+
+
+```{r echo=FALSE}
+```
+
+
+
+```{r echo=FALSE, results='asis'}
+cat(
+  "<pre>",
+  "<details><summary style='color: #4169E1;'> Show/hide SVG text </summary>",
+  htmltools::htmlEscape(as.character(doc)),
+  "</details>",
+  "</pre>", sep='')
+```
+
+
 <img src="man/figures/README-hex.svg" />
+
+
+
 
 ### Check patterns
 
-```{r echo=FALSE}
+<details><summary style='color: #4169E1;'>Show R code (click to open/close) </summary>
+
+```{r echo=TRUE}
 vars <- expand.grid(
   angle = c(0, 22.5, 45, 67.5),
   spacing = c(0.1, 0.25, 0.5, 0.95) * 100
@@ -335,34 +330,36 @@ vars <- expand.grid(
   mutate(id = paste('check', angle, spacing, sep="_"))
 
 patterns <- vars %>% 
-  purrr::pmap(create_check_pattern) 
-```
+  purrr::pmap(create_pattern_check) 
 
-
-```{r echo=FALSE}
 doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
+# doc$show()
+doc$save("man/figures/README-check.svg")
 ```
+
+</details>
 
 
 ```{r echo=FALSE, results='asis'}
-cat("<pre><details closed><summary> Show SVG text (click to open) </summary>",
-htmltools::htmlEscape(as.character(doc)), 
-"</details></pre>\n", sep='')
-```
-
-```{r echo = FALSE}
-if (interactive()) {
-  doc$show()
-} 
-doc$save("man/figures/README-check.svg")
+cat(
+  "<pre>",
+  "<details><summary style='color: #4169E1;'> Show/hide SVG text </summary>",
+  htmltools::htmlEscape(as.character(doc)),
+  "</details>",
+  "</pre>", sep='')
 ```
 
 <img src="man/figures/README-check.svg" />
 
 
+
+
+
 ### Gradients
 
-```{r echo=FALSE}
+<details><summary style='color: #4169E1;'>Show R code (click to open/close) </summary>
+
+```{r echo=TRUE}
 
 vars <- expand.grid(
   angle = c(0, 45),
@@ -372,141 +369,85 @@ vars <- expand.grid(
   mutate(id = paste('grad', angle, colour1, colour2, sep="_"))
 
 patterns <- vars %>% 
-  purrr::pmap(create_gradient_pattern) 
-```
+  purrr::pmap(create_pattern_gradient) 
 
-
-```{r echo=FALSE}
 doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
+# doc$show()
+doc$save("man/figures/README-gradients.svg")
 ```
+
+</details>
 
 
 ```{r echo=FALSE, results='asis'}
-cat("<pre><details closed><summary> Show SVG text (click to open) </summary>",
-htmltools::htmlEscape(as.character(doc)), 
-"</details></pre>\n", sep='')
-```
-
-```{r echo = FALSE}
-if (interactive()) {
-  doc$show()
-} 
-doc$save("man/figures/README-gradients.svg")
+cat(
+  "<pre>",
+  "<details><summary style='color: #4169E1;'> Show/hide SVG text </summary>",
+  htmltools::htmlEscape(as.character(doc)),
+  "</details>",
+  "</pre>", sep='')
 ```
 
 <img src="man/figures/README-gradients.svg" />
 
 
-## Encoding/decoding patterns from colours
 
-A key feature of this set of patterns is that they can be encoded in
-an RGB colour.  Also, every RGB colour (excluding black, white and fully transparent)
-can be decoded to a pattern in this library.
+## Creating the logo for this package
 
-This encoding/decoding is carried out by the [`lofi`](https://github.com/coolbutuseless/lofi) package.
-Because this has to squeeze multiple continuous variables in to 24-bits, along with 
-the actual colour of the pattern, there
-will be some quantization associated with a pattern-encoded-as-RGB e.g. angle may
-only be encoded in 45degree increments.
 
 ```{r}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Encode a stripe pattern into a colour. Arguments to set correspond to 
-# arguments from the individual pattern creation function 
-# e.g. `create_stripe_pattern()`
+# Building an SVG logo with an animated stripe
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-hex_colour <- encode_pattern_params_as_hex_colour(
-  pattern_name = 'stripe', 
-  angle = 135,
-  fill_fraction = 0.8,
-  colour = 'darkblue'
+logo <- svg_doc(width = 200, height = 200)
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Create a simple pattern using the `svgpatternsimple` package
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+stripes <- svgpatternsimple::create_pattern_hatch(
+  id            = 'stripe', 
+  colour        = '#002366', 
+  fill_fraction = 0.2,
+  spacing       = 8,
+  angle         = 45
 )
 
-hex_colour
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Add the pattern to the documents list of definitions
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+logo$defs(stripes)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Decode this hex colour back into a pattern object
+# Create a hexagon filled with this pattern, and add it to the document
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-pattern <- decode_pattern_from_rgba_vec(lofi::hex_colour_to_rgba_vec(hex_colour))
+len     <- 100
+angles  <- (seq(0, 360, 60) + 90) * pi/180
+xs      <- round(len * cos(angles) + 100, 2)
+ys      <- round(len * sin(angles) + 100, 2)
+hex     <- stag$polygon(id = 'hex', xs = xs, ys = ys)
+hex$update(stroke = '#c0c0c0', fill = stripes)
+logo$append(hex)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Render the pattern object
+# output
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-doc <- pattern$as_full_svg(width = 400, height = 100)
-```
-
-
-```{r echo=FALSE, results='asis'}
-cat("<pre><details closed><summary> Show SVG text (click to open) </summary>",
-htmltools::htmlEscape(as.character(doc)), 
-"</details></pre>\n", sep='')
-```
-
-```{r echo = FALSE}
-if (interactive()) {
-  doc$show()
-} 
-doc$save("man/figures/README-encode-as-colour.svg")
-```
-
-<img src="man/figures/README-encode-as-colour.svg" />
-
-
-### Mapping from RGB Space into Pattern Space
-
-Colours in *RGB space* do not really map to anything 
-coherent in *pattern space*.
-
-The following shows a viridis palette mapped to patterns.  Note that patterns 
-near each other are possibly of similar type e.g. the last 4 patterns
-are all checkerboard.
-
-
-```{r viridis_img, echo=FALSE, fig.height = 2}
-img <- function(obj, nam) {
-  image(1:length(obj), 1, as.matrix(1:length(obj)), col=obj, 
-        main = nam, ylab = "", xaxt = "n", yaxt = "n",  bty = "n", xlab = '')
-}
-
-img(viridis::cividis(32), "viridis::cividis(32)")
-```
-
- 
-
-```{r}
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Create the patterns corresponding to 32 cividis colours
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-patterns <- viridis::cividis(32) %>%
-  lapply(lofi::hex_colour_to_rgba_vec) %>%
-  lapply(decode_pattern_from_rgba_vec)
-```
-
-
-```{r echo=FALSE}
-doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
+# logo$show()
+logo$save("man/figures/logo.svg")
 ```
 
 
 
 ```{r echo=FALSE, results='asis'}
-cat("<pre><details closed><summary> Show SVG text (click to open) </summary>",
-htmltools::htmlEscape(as.character(doc)), 
-"</details></pre>\n", sep='')
+cat(
+  "<pre>",
+  "<details><summary style='color: #4169E1;'> Show/hide SVG text </summary>",
+  htmltools::htmlEscape(as.character(logo)),
+  "</details>",
+  "</pre>", sep='')
 ```
 
 
-```{r echo = FALSE}
-if (interactive()) {
-  doc$show()
-} 
-doc$save("man/figures/README-viridis.svg")
-```
-
-<img src="man/figures/README-viridis.svg" />
-
-
-
+<img src = "man/figures/logo.svg">
 
 
 

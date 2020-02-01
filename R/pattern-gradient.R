@@ -1,8 +1,10 @@
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#' Create linear gradient svg pattern
+#' Create an SVG gradient to use as a pattern
 #'
-#' @inheritParams create_stripe_pattern
+#' Create an SVG pattern which will \code{fill} an element with a colour gradient.
+#'
+#' @inheritParams create_pattern_stripe
 #' @param colour1,colour2 the start and end colours of the gradient
 #'
 #' @return minisvg::SVGPattern object
@@ -10,8 +12,35 @@
 #' @import minisvg
 #' @import glue
 #' @export
+#'
+#'
+#' @examples
+#' \dontrun{
+#' # Create an SVG document
+#' library(minisvg)
+#' doc   <- minisvg::svg_doc()
+#'
+#' # Create the pattern and add to the SVG definitions
+#' my_pattern <- create_pattern_gradient(id = 'mypattern')
+#' doc$defs(my_pattern)
+#'
+#' # Create a rectangle with the animation
+#' rect  <- stag$rect(
+#'   x      = "10%",
+#'   y      = "10%",
+#'   width  = "80%",
+#'   height = "80%",
+#'   stroke = 'black',
+#'   fill   = my_pattern
+#' )
+#'
+#' # Add this rectangle to the document, show the SVG text, then render it
+#' doc$append(rect)
+#' doc
+#' doc$show()
+#' }
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-create_gradient_pattern <- function(id,
+create_pattern_gradient <- function(id,
                                     angle         = 45,
                                     colour1       = '#ffffff',
                                     colour2       = '#000000',

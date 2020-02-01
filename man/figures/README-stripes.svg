@@ -1,68 +1,68 @@
 <svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     <pattern id="stripe_0_0.05" width="20" height="20" patternTransform="rotate(0 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:2; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:2; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_45_0.05" width="20" height="20" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:2; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:2; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_90_0.05" width="20" height="20" patternTransform="rotate(90 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:2; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:2; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_135_0.05" width="20" height="20" patternTransform="rotate(135 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:2; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:2; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_0_0.25" width="20" height="20" patternTransform="rotate(0 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:10; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:10; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_45_0.25" width="20" height="20" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:10; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:10; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_90_0.25" width="20" height="20" patternTransform="rotate(90 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:10; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:10; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_135_0.25" width="20" height="20" patternTransform="rotate(135 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:10; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:10; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_0_0.5" width="20" height="20" patternTransform="rotate(0 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:20; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:20; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_45_0.5" width="20" height="20" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:20; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:20; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_90_0.5" width="20" height="20" patternTransform="rotate(90 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:20; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:20; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_135_0.5" width="20" height="20" patternTransform="rotate(135 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:20; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:20; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_0_0.95" width="20" height="20" patternTransform="rotate(0 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:38; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:38; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_45_0.95" width="20" height="20" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:38; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:38; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_90_0.95" width="20" height="20" patternTransform="rotate(90 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:38; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:38; stroke-opacity:1;" />
     </pattern>
     <pattern id="stripe_135_0.95" width="20" height="20" patternTransform="rotate(135 0 0)" patternUnits="userSpaceOnUse">
-      <rect style="fill:#ffffff; fill-opacity:1; stroke:none;" width="100%" height="100%" />
-      <line style="stroke:#000000; stroke-width:38; stroke-opacity:1;" x1="0" y1="0" x2="0" y2="20" />
+      <rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+      <line x1="0" y1="0" x2="0" y2="20" style="stroke:#000000; stroke-width:38; stroke-opacity:1;" />
     </pattern>
   </defs>
   <rect style='fill: url(#stripe_0_0.05);' x='0' y='0' height='100' width='200'></rect>
