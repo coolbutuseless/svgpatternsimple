@@ -12,6 +12,9 @@
 `svgpatternsimple` provides a basic set of simple repeating SVG
 patterns.
 
+For online documentation, see the [svgpatternsimple pkgdown
+website](https://coolbutuseless.github.io/package/svgpatternsimple/index.html).
+
 ## Installation
 
 You can install from
@@ -20,7 +23,7 @@ You can install from
 ``` r
 # install.packages("devtools")
 install_github("coolbutuseless/poissoned")        # Generate points via poisson disk sampling
-install_github("coolbutuseless/minisvg")          # Build SVG documents with R
+install_github("coolbutuseless/minnisvg")         # Build SVG documents with R
 install_github("coolbutuseless/svgpatternsimple") # This package
 ```
 

@@ -40,6 +40,7 @@ set.seed(1) # for repeatable stipple pattern
 
 `svgpatternsimple` provides a basic set of simple repeating SVG patterns.
 
+For online documentation, see the [svgpatternsimple pkgdown website](https://coolbutuseless.github.io/package/svgpatternsimple/index.html).
 
 ## Installation
 
