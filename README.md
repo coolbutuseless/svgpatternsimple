@@ -46,6 +46,9 @@ dot <- create_pattern_dot(id = 'dot')
 ```
 
 ``` r
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# All `minisvg::SVGPattern` objects have a built in '$show()' method.
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 dot$show()
 ```
 
@@ -61,6 +64,50 @@ dot$show()
 &lt;/svg&gt;</details></pre>
 
 <img src="man/figures/README-example-dot.svg" />
+
+## Applying a pattern within an SVG document
+
+1.  Create a `minisvg` document
+2.  Cretae a pattern
+3.  Add the pattern definition to the SVG document
+4.  Create a rectangle
+5.  Assign the pattern as the fill for the rectangle
+6.  Append the rectangle to the document.
+
+<!-- end list -->
+
+``` r
+library(minisvg)
+doc <- minisvg::svg_doc(width=400, height=100)
+
+mypattern <- create_pattern_hex(id = 'hexpattern')
+doc$defs(mypattern)
+
+myrect <- stag$rect(x=0, y=0, width=400, height=100, fill=mypattern)
+
+doc$append(myrect)
+
+# doc$show()
+```
+
+<svg width="400" height="100" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<defs>
+<pattern id="hexpattern" width="34.6410161513775" height="60" patternTransform="rotate(0 0 0)" patternUnits="userSpaceOnUse">
+<rect width="100%" height="100%" style="fill:#ffffff; fill-opacity:1; stroke:none;" />
+<g style="stroke:#000000; stroke-width:1; stroke-opacity:1;">
+<line x1="17.3205080756888" y1="10" x2="0" y2="20" />
+<line x1="17.3205080756888" y1="10" x2="34.6410161513775" y2="20" />
+<line x1="17.3205080756888" y1="50" x2="0" y2="40" />
+<line x1="17.3205080756888" y1="50" x2="34.6410161513775" y2="40" />
+<line x1="17.3205080756888" y1="0" x2="17.3205080756888" y2="10" />
+<line x1="17.3205080756888" y1="50" x2="17.3205080756888" y2="60" />
+<line x1="0" y1="20" x2="0" y2="40" />
+<line x1="34.6410161513775" y1="20" x2="34.6410161513775" y2="40" />
+</g> </pattern> </defs>
+<rect x="0" y="0" width="400" height="100" fill="url('#hexpattern')" />
+
+</svg>
 
 ## Example: All patterns
 
@@ -304,11 +351,6 @@ doc$save("man/figures/README-all-patterns.svg")
 
 ### Stripes
 
-<details>
-
-<summary style='color: #4169E1;'>Show R code (click to open/close)
-</summary>
-
 ``` r
 vars <- expand.grid(
   angle = c(0, 45, 90, 135),
@@ -321,9 +363,8 @@ patterns <- vars %>%
 
 doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 # doc$show()
+doc$save("man/figures/README-stripes.svg")
 ```
-
-</details>
 
 <pre><details><summary style='color: #4169E1;'> Show/hide SVG text </summary>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
@@ -415,11 +456,6 @@ doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 
 ### Dot patterns
 
-<details>
-
-<summary style='color: #4169E1;'>Show R code (click to open/close)
-</summary>
-
 ``` r
 vars <- expand.grid(
   angle = c(0, 22.5, 45, 67.5),
@@ -434,8 +470,6 @@ doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 # doc$show()
 doc$save("man/figures/README-dots.svg")
 ```
-
-</details>
 
 <pre><details><summary style='color: #4169E1;'> Show/hide SVG text </summary>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
@@ -527,11 +561,6 @@ doc$save("man/figures/README-dots.svg")
 
 ### Hatching
 
-<details>
-
-<summary style='color: #4169E1;'>Show R code (click to open/close)
-</summary>
-
 ``` r
 patterns <- vars %>% 
   mutate(id = paste('hatch', angle, fill_fraction, sep="_")) %>% 
@@ -541,8 +570,6 @@ doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 # doc$show()
 doc$save("man/figures/README-hatch.svg")
 ```
-
-</details>
 
 <pre><details><summary style='color: #4169E1;'> Show/hide SVG text </summary>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
@@ -682,11 +709,6 @@ doc$save("man/figures/README-hatch.svg")
 
 ### Stippling
 
-<details>
-
-<summary style='color: #4169E1;'>Show R code (click to open/close)
-</summary>
-
 ``` r
 set.seed(1)
 patterns <- vars %>% 
@@ -697,8 +719,6 @@ doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 # doc$show()
 doc$save("man/figures/README-stipple.svg")
 ```
-
-</details>
 
 <pre><details><summary style='color: #4169E1;'> Show/hide SVG text </summary>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
@@ -3312,11 +3332,6 @@ doc$save("man/figures/README-stipple.svg")
 
 ### Hex patterns
 
-<details>
-
-<summary style='color: #4169E1;'>Show R code (click to open/close)
-</summary>
-
 ``` r
 patterns <- vars %>% 
   mutate(id = paste('hex', angle, fill_fraction, sep="_")) %>% 
@@ -3326,8 +3341,6 @@ doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 # doc$show()
 doc$save("man/figures/README-hex.svg")
 ```
-
-</details>
 
 <pre><details><summary style='color: #4169E1;'> Show/hide SVG text </summary>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
@@ -3563,11 +3576,6 @@ doc$save("man/figures/README-hex.svg")
 
 ### Check patterns
 
-<details>
-
-<summary style='color: #4169E1;'>Show R code (click to open/close)
-</summary>
-
 ``` r
 vars <- expand.grid(
   angle = c(0, 22.5, 45, 67.5),
@@ -3582,8 +3590,6 @@ doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 # doc$show()
 doc$save("man/figures/README-check.svg")
 ```
-
-</details>
 
 <pre><details><summary style='color: #4169E1;'> Show/hide SVG text </summary>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
@@ -3723,11 +3729,6 @@ doc$save("man/figures/README-check.svg")
 
 ### Gradients
 
-<details>
-
-<summary style='color: #4169E1;'>Show R code (click to open/close)
-</summary>
-
 ``` r
 vars <- expand.grid(
   angle = c(0, 45),
@@ -3743,8 +3744,6 @@ doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 # doc$show()
 doc$save("man/figures/README-gradients.svg")
 ```
-
-</details>
 
 <pre><details><summary style='color: #4169E1;'> Show/hide SVG text </summary>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;

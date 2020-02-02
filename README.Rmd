@@ -72,6 +72,9 @@ dot <- create_pattern_dot(id = 'dot')
 ```
 
 ```{r eval=FALSE}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# All `minisvg::SVGPattern` objects have a built in '$show()' method.
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 dot$show()
 ```
 
@@ -93,6 +96,35 @@ dot$save_full_svg("man/figures/README-example-dot.svg", height=100, include_decl
 ```
 
 <img src="man/figures/README-example-dot.svg" />
+
+
+## Applying a pattern within an SVG document
+
+1. Create a `minisvg` document
+2. Cretae a pattern
+3. Add the pattern definition to the SVG document
+4. Create a rectangle
+5. Assign the pattern as the fill for the rectangle
+6. Append the rectangle to the document.
+
+```{r}
+library(minisvg)
+doc <- minisvg::svg_doc(width=400, height=100)
+
+mypattern <- create_pattern_hex(id = 'hexpattern')
+doc$defs(mypattern)
+
+myrect <- stag$rect(x=0, y=0, width=400, height=100, fill=mypattern)
+
+doc$append(myrect)
+
+# doc$show()
+```
+
+
+```{r echo=FALSE}
+doc
+```
 
 
 
@@ -135,8 +167,6 @@ cat(
 
 ### Stripes
 
-<details><summary style='color: #4169E1;'>Show R code (click to open/close) </summary>
-
 ```{r echo=TRUE}
 vars <- expand.grid(
   angle = c(0, 45, 90, 135),
@@ -149,9 +179,8 @@ patterns <- vars %>%
 
 doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 # doc$show()
+doc$save("man/figures/README-stripes.svg")
 ```
-
-</details>
 
 
 
@@ -164,12 +193,6 @@ cat(
   "</pre>", sep='')
 ```
 
-```{r echo = FALSE}
-if (interactive()) {
-  doc$show()
-} 
-doc$save("man/figures/README-stripes.svg")
-```
 
 <img src="man/figures/README-stripes.svg" />
 
@@ -177,7 +200,6 @@ doc$save("man/figures/README-stripes.svg")
 
 ### Dot patterns
 
-<details><summary style='color: #4169E1;'>Show R code (click to open/close) </summary>
 
 ```{r echo=TRUE}
 vars <- expand.grid(
@@ -193,8 +215,6 @@ doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 # doc$show()
 doc$save("man/figures/README-dots.svg")
 ```
-
-</details>
 
 
 ```{r echo=FALSE, results='asis'}
@@ -214,8 +234,6 @@ cat(
 
 ### Hatching
 
-<details><summary style='color: #4169E1;'>Show R code (click to open/close) </summary>
-
 ```{r echo=TRUE}
 patterns <- vars %>% 
   mutate(id = paste('hatch', angle, fill_fraction, sep="_")) %>% 
@@ -224,12 +242,6 @@ patterns <- vars %>%
 doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 # doc$show()
 doc$save("man/figures/README-hatch.svg")
-```
-
-</details>
-
-
-```{r echo=FALSE}
 ```
 
 
@@ -250,8 +262,6 @@ cat(
 
 ### Stippling
 
-<details><summary style='color: #4169E1;'>Show R code (click to open/close) </summary>
-
 ```{r echo=TRUE}
 set.seed(1)
 patterns <- vars %>% 
@@ -263,7 +273,6 @@ doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 doc$save("man/figures/README-stipple.svg")
 ```
 
-</details>
 
 
 
@@ -284,8 +293,6 @@ cat(
 
 ### Hex patterns
 
-<details><summary style='color: #4169E1;'>Show R code (click to open/close) </summary>
-
 ```{r echo=TRUE}
 patterns <- vars %>% 
   mutate(id = paste('hex', angle, fill_fraction, sep="_")) %>% 
@@ -294,12 +301,6 @@ patterns <- vars %>%
 doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 # doc$show()
 doc$save("man/figures/README-hex.svg")
-```
-
-</details>
-
-
-```{r echo=FALSE}
 ```
 
 
@@ -321,7 +322,6 @@ cat(
 
 ### Check patterns
 
-<details><summary style='color: #4169E1;'>Show R code (click to open/close) </summary>
 
 ```{r echo=TRUE}
 vars <- expand.grid(
@@ -337,8 +337,6 @@ doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 # doc$show()
 doc$save("man/figures/README-check.svg")
 ```
-
-</details>
 
 
 ```{r echo=FALSE, results='asis'}
@@ -358,8 +356,6 @@ cat(
 
 ### Gradients
 
-<details><summary style='color: #4169E1;'>Show R code (click to open/close) </summary>
-
 ```{r echo=TRUE}
 
 vars <- expand.grid(
@@ -377,7 +373,6 @@ doc <- SVGPatternList_to_svg(patterns, width = 200, height = 100, ncol = 4)
 doc$save("man/figures/README-gradients.svg")
 ```
 
-</details>
 
 
 ```{r echo=FALSE, results='asis'}
